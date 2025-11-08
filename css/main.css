@@ -17,12 +17,13 @@
 html, body {
     height: 100%;
     margin: 0;
-    background: #000;
     font-family: 'Roboto', sans-serif;
     color: white;
+    background-image: url('../images/bg_fill.png');
+    background-repeat: repeat;
 }
 
-body {
+.bg {
     background-image: url('../images/main-screen__bgc.png');
     background-repeat: no-repeat;
     background-position: right top;
@@ -323,3 +324,52 @@ p {
     justify-content: center;
 }
 
+.apply-from {
+    padding: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #2C2C2C;
+    width: 654px;
+    height: 551px;
+    opacity: 1;
+    border-radius: 50px;
+    align-items: center;
+}
+
+.apply-from__title {
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 140%;
+    text-align: center;
+}
+
+.apply-from__contact {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 160%;
+    text-align: center;
+    opacity: 50%;
+}
+
+.apply-from__input {
+    width: 454px;
+    border-radius: 50px;
+    background-color: #616161;
+    padding: 10px 0 10px 25px;
+}
+
+.apply-from__input::placeholder {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 160%;
+    color: white;
+}
+
+.apply-from__input-name {
+    margin-top: 28px;
+}
+
+.apply-from__confirm {
+    margin-top: 32px;
+}
