@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
     <title>PC-Shop</title>
-    <link rel="stylesheet" href="css/reset.css"></link>
-    <link rel="stylesheet" href="css/main.css"></link>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <div class="bg">
@@ -15,7 +15,7 @@
                     <a class="menu__item">Процесс работы</a>
                     <a class="menu__item">Команда</a>
                 </div>
-                <button class="btn primary" onclick="showForm()">Оставить заявку</button>
+                <button class="btn primary show-modal-window">Оставить заявку</button>
             </div>
 
             <div class="container">
@@ -40,7 +40,7 @@
                             <div class="timer__period">Секунд</div>
                         </div>
                     </div>
-                    <button class="btn secondary">Оставить заявку</button>
+                    <button class="btn secondary show-modal-window">Оставить заявку</button>
                 </div>
 
                 <div class="work" >
@@ -113,7 +113,7 @@
                 <div class="apply">
                     <h2>Закажите свою уникальную сборку</h2>
                     <h4 class="apply__contact">Мы свяжемся с вами, чтобы уточнить детали заказа</h4>
-                    <button class="btn secondary apply__button">Оставить заявку</button>
+                    <button class="btn secondary apply__button show-modal-window">Оставить заявку</button>
                 </div>
 
                 <div class="media">
@@ -127,14 +127,14 @@
         </div>
     </div>
 
-    <div>
+    <div class="modal" id="modal">
         <form action="#" class="apply-from">
             <h5 class="apply-from__title">Заявка на сборку ПК</h5>
             <div class="apply-from__contact">Мы свяжемся с вами, чтобы обсудить детали заказа</div>
             <input type="text" name="name" class="apply-from__input apply-from__input-name" placeholder="Как вас зовут"/>
             <input type="text" name="phone" class="apply-from__input" placeholder="Номер телефона"/>
             <input type="text" name="email" class="apply-from__input" placeholder="E-mail" />
-            <button class="btn secondary apply-from__confirm">Отправить</button>
+            <button class="btn secondary apply-from__confirm close" >Отправить</button>
         </form>
     </div>
 
