@@ -15,6 +15,9 @@ jobs:
               uses: PabloLec/website-to-gif@2.1.5
               with:
                     url: "https://codeine200.github.io/pc-shop/"
+                    save_path: "assets"
+                    file_name: "demo"
+                    file_format: "gif"
                     window_width: 1280
                     window_height: 800
                     final_width: 400
