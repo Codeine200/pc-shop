@@ -40,24 +40,27 @@ jobs:
               with:
                   name: demo-gif
                   path: assets/demo.gif/demo.gif
-            
+
             - name: Commit GIF
               run: |
                   git config --global user.name "github-actions[bot]"
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
                   
                   # Проверяем, существует ли файл
-                  if [ -f assets/demo.gif/demo.gif ]; then
-                    git add assets/demo.gif/demo.gif
+                  if [ -f "assets/demo.gif/demo.gif" ]; then
+                      git add "assets/demo.gif/demo.gif"
                   
-                    # Проверяем изменения
-                    if git diff --cached --quiet; then
-                      echo "No changes to commit"
-                      exit 0
-                    fi
+                      # Проверяем изменения
+                      if git diff --cached --quiet; then
+                          echo "No changes to commit"
+                          exit 0
+                      fi
                   
-                    git commit -m "Update demo GIF"
-                    git push
+                      git commit -m "Update demo GIF"
+                      git push
                   else
-                    echo "GIF not found, skipping commit"
-                    exit 0
+                      echo "GIF not found, skipping commit"
+                      exit 0
+                  fi
+
+ 
