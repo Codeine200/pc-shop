@@ -33,17 +33,15 @@ jobs:
                   window_width: 1280
                   window_height: 800
 
-            # 4️⃣ Проверяем, где лежит файл
-            - name: Debug assets folder
+            # 4️⃣ Находим все GIF в runner
+            - name: Find GIF files
               run: |
-                  echo "Listing assets folder"
-                  ls -l assets
-                  echo "Listing recursively"
-                  ls -lR assets
+                  echo "Searching for GIFs..."
+                  find . -type f -name "*.gif"
 
-            # 5️⃣ Загружаем все файлы из assets как артефакт
-            - name: Upload GIF artifact
+            # 5️⃣ Загружаем все найденные GIF как артефакт
+            - name: Upload all GIFs as artifact
               uses: actions/upload-artifact@v4
               with:
                   name: demo-gif
-                  path: assets/*
+                  path: '**/*.gif'
