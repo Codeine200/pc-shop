@@ -1,0 +1,35 @@
+name: Generate demo file
+
+on:
+    push:
+        paths-ignore:
+            - "**/*.gif"
+
+jobs:
+    generate-gif:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Website to file
+              uses: PabloLec/website-to-gif@2.1.5
+              with:
+                  url: "https://codeine200.github.io/pc-shop/"
+                  scroll_step: 15
+                  time_per_frame: 80
+                  width: 400
+                  height: 300
+
+            - name: Commit file to GH repo
+              run: |
+                  git config --global user.name "github-actions[bot]"
+                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
+                  
+                  if git diff --quiet; then
+                    echo "No changes to commit"
+                    exit 0
+                  fi
+                  
+                  git add .
+                  git commit -m "Update demo gif"
+                  git push
