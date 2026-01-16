@@ -28,23 +28,29 @@ jobs:
                   scroll_step: 20
                   time_per_frame: 100
 
-            - name: Show files for debugging
-              run: ls -l assets
+            - name: Debug assets folder
+              run: |
+                  echo "Listing assets folder"
+                  ls -l assets
+                  echo "Listing recursively"
+                  ls -lR assets
 
             - name: Upload artifact
               uses: actions/upload-artifact@v4
               with:
                   name: demo-gif
-                  path: assets/demo.gif
-
-            - name: Commit GIF if changed
+                  path: assets/demo.gif/demo.gif
+            
+            - name: Commit GIF
               run: |
                   git config --global user.name "github-actions[bot]"
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
                   
-                  if [ -f assets/demo.gif ]; then
-                    git add assets/demo.gif
+                  # Проверяем, существует ли файл
+                  if [ -f assets/demo.gif/demo.gif ]; then
+                    git add assets/demo.gif/demo.gif
                   
+                    # Проверяем изменения
                     if git diff --cached --quiet; then
                       echo "No changes to commit"
                       exit 0
@@ -55,4 +61,3 @@ jobs:
                   else
                     echo "GIF not found, skipping commit"
                     exit 0
-                  fi
