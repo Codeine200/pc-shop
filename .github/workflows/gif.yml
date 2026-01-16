@@ -16,7 +16,7 @@ jobs:
             - name: Create assets folder
               run: mkdir -p assets
 
-            - name: Website to file
+            - name: Generate GIF
               uses: PabloLec/website-to-gif@2.1.5
               with:
                   url: "https://codeine200.github.io/pc-shop/"
@@ -28,16 +28,16 @@ jobs:
                   scroll_step: 20
                   time_per_frame: 100
 
-            - name: Check GIF file
+            - name: Show files for debugging
               run: ls -l assets
 
-            - name: Upload GIF artifact
-              uses: actions/upload-artifact@v3
+            - name: Upload artifact
+              uses: actions/upload-artifact@v4
               with:
                   name: demo-gif
                   path: assets/demo.gif
-            
-            - name: Commit GIF
+
+            - name: Commit GIF if changed
               run: |
                   git config --global user.name "github-actions[bot]"
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -45,7 +45,6 @@ jobs:
                   if [ -f assets/demo.gif ]; then
                     git add assets/demo.gif
                   
-                    # Проверяем, есть ли изменения
                     if git diff --cached --quiet; then
                       echo "No changes to commit"
                       exit 0
@@ -56,3 +55,4 @@ jobs:
                   else
                     echo "GIF not found, skipping commit"
                     exit 0
+                  fi
