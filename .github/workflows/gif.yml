@@ -1,21 +1,24 @@
 name: Generate demo GIF
 
 on:
+    workflow_dispatch:   # Можно запускать вручную
     push:
         paths-ignore:
-            - "assets/demo.gif"
-    workflow_dispatch:
+            - "assets/*"     # Игнорируем GIF, чтобы не зациклиться
 
 jobs:
     generate-gif:
         runs-on: ubuntu-latest
 
         steps:
+            # 1️⃣ Клонируем репозиторий
             - uses: actions/checkout@v3
 
+            # 2️⃣ Создаём папку assets
             - name: Create assets folder
               run: mkdir -p assets
 
+            # 3️⃣ Генерируем GIF
             - name: Generate GIF
               uses: PabloLec/website-to-gif@2.1.5
               with:
@@ -27,7 +30,10 @@ jobs:
                   final_height: 300
                   scroll_step: 20
                   time_per_frame: 100
+                  window_width: 1280
+                  window_height: 800
 
+            # 4️⃣ Проверяем, где лежит файл
             - name: Debug assets folder
               run: |
                   echo "Listing assets folder"
@@ -35,32 +41,9 @@ jobs:
                   echo "Listing recursively"
                   ls -lR assets
 
-            - name: Upload artifact
+            # 5️⃣ Загружаем все файлы из assets как артефакт
+            - name: Upload GIF artifact
               uses: actions/upload-artifact@v4
               with:
                   name: demo-gif
-                  path: assets/demo.gif/demo.gif
-
-            - name: Commit GIF
-              run: |
-                  git config --global user.name "github-actions[bot]"
-                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
-                  
-                  # Проверяем, существует ли файл
-                  if [ -f "assets/demo.gif/demo.gif" ]; then
-                      git add "assets/demo.gif/demo.gif"
-                  
-                      # Проверяем изменения
-                      if git diff --cached --quiet; then
-                          echo "No changes to commit"
-                          exit 0
-                      fi
-                  
-                      git commit -m "Update demo GIF"
-                      git push
-                  else
-                      echo "GIF not found, skipping commit"
-                      exit 0
-                  fi
-
- 
+                  path: assets/*
